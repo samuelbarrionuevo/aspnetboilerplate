@@ -2,6 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
+//MinimumVisualStudioVersion: The minimum version of Visual Studio required to open this solution file.
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "AbpApiDoc", "AbpApiDoc.shfbproj", "{834E9C19-4FE8-418D-822B-69BE2B939F89}"
 EndProject
@@ -19,6 +20,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+//Contains global settings related to the solution's extensibility. SolutionGuid is a unique identifier for the solution.
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E9B0B6D-AD92-4A3A-96EF-D67F9C562556}
 	EndGlobalSection
