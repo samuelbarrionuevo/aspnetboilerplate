@@ -8,15 +8,18 @@ using Abp.Castle.Logging.Log4Net;
 using Abp.Configuration.Startup;
 using Abp.Dependency;
 using Abp.EntityFrameworkCore;
+using Abp.EntityFrameworkCore.Extensions;
+using Abp.HtmlSanitizer;
+using Abp.HtmlSanitizer.Configuration;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AbpAspNetCoreDemo.Core;
+using AbpAspNetCoreDemo.Core.Application.Account;
 using AbpAspNetCoreDemo.Db;
 using Castle.MicroKernel.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace AbpAspNetCoreDemo
@@ -26,8 +29,9 @@ namespace AbpAspNetCoreDemo
         typeof(AbpAspNetCoreDemoCoreModule),
         typeof(AbpEntityFrameworkCoreModule),
         typeof(AbpCastleLog4NetModule),
-        typeof(AbpAspNetCoreODataModule)
-        )]
+        typeof(AbpAspNetCoreODataModule),
+        typeof(AbpHtmlSanitizerModule)
+    )]
     public class AbpAspNetCoreDemoModule : AbpModule
     {
         public static AsyncLocal<Action<IAbpStartupConfiguration>> ConfigurationAction =
@@ -55,8 +59,11 @@ namespace AbpAspNetCoreDemo
             {
                 SizeLimit = 2048
             };
-            
+
             ConfigurationAction.Value?.Invoke(Configuration);
+
+            Configuration.Modules.AbpHtmlSanitizer()
+                .AddSelector<IAccountAppService>(x => nameof(x.Register));
         }
 
         public override void Initialize()
@@ -69,7 +76,7 @@ namespace AbpAspNetCoreDemo
             var builder = new DbContextOptionsBuilder<MyDbContext>();
 
             var inMemorySqlite = new SqliteConnection("Data Source=:memory:");
-            builder.UseSqlite(inMemorySqlite);
+            builder.UseSqlite(inMemorySqlite).AddAbpDbContextOptionsExtension();
 
             iocManager.IocContainer.Register(
                 Component

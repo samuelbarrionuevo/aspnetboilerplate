@@ -4,9 +4,11 @@ using System.Data.Entity;
 using Abp.Zero.EntityFramework;
 using Abp.Zero.SampleApp.BookStore;
 using Abp.Zero.SampleApp.EntityHistory;
+using Abp.Zero.SampleApp.EntityHistory.EFCore;
 using Abp.Zero.SampleApp.MultiTenancy;
 using Abp.Zero.SampleApp.Roles;
 using Abp.Zero.SampleApp.TPH;
+using Abp.Zero.SampleApp.TPH.EFCore;
 using Abp.Zero.SampleApp.Users;
 
 namespace Abp.Zero.SampleApp.EntityFramework
@@ -45,6 +47,8 @@ namespace Abp.Zero.SampleApp.EntityFramework
 
         public DbSet<Foo> Foo { get; set; }
         
+        public DbSet<Employee> Employees { get; set; }
+
         public AppDbContext(DbConnection existingConnection)
             : base(existingConnection, true)
         {

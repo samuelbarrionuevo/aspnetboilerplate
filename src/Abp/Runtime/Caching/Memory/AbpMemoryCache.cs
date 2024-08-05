@@ -12,7 +12,7 @@ namespace Abp.Runtime.Caching.Memory
     {
         private MemoryCache _memoryCache;
         private readonly MemoryCacheOptions _memoryCacheOptions;
-        
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -38,26 +38,36 @@ namespace Abp.Runtime.Caching.Memory
             {
                 throw new AbpException("Can not insert null values to the cache!");
             }
+            var cacheOptions = new MemoryCacheEntryOptions { Size = 1 };
 
-            if (absoluteExpireTime.HasValue)
+            if (absoluteExpireTime.HasValue || slidingExpireTime.HasValue)
             {
-                _memoryCache.Set(key, value, absoluteExpireTime.Value);
-            }
-            else if (slidingExpireTime.HasValue)
-            {
-                _memoryCache.Set(key, value, slidingExpireTime.Value);
+                if (absoluteExpireTime.HasValue)
+                {
+                    cacheOptions.AbsoluteExpiration = absoluteExpireTime;
+                }
+
+                if (slidingExpireTime.HasValue)
+                {
+                    cacheOptions.SlidingExpiration = slidingExpireTime;
+                }
+
+                _memoryCache.Set(key, value, cacheOptions);
             }
             else if (DefaultAbsoluteExpireTimeFactory != null)
             {
-                _memoryCache.Set(key, value, DefaultAbsoluteExpireTimeFactory(key));
+                cacheOptions.AbsoluteExpiration = DefaultAbsoluteExpireTimeFactory(key);
+                _memoryCache.Set(key, value, cacheOptions);
             }
             else if (DefaultAbsoluteExpireTime.HasValue)
             {
-                _memoryCache.Set(key, value, DefaultAbsoluteExpireTime.Value);
+                cacheOptions.AbsoluteExpiration = DefaultAbsoluteExpireTime.Value;
+                _memoryCache.Set(key, value, cacheOptions);
             }
             else
             {
-                _memoryCache.Set(key, value, DefaultSlidingExpireTime);
+                cacheOptions.SlidingExpiration = DefaultSlidingExpireTime;
+                _memoryCache.Set(key, value, cacheOptions);
             }
         }
 

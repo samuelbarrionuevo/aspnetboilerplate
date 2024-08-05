@@ -5,6 +5,10 @@
 
       /* Application paths *****************************************/
 
+      //Version
+      abp.aspnetboilerplate = abp.aspnetboilerplate || {};
+      abp.aspnetboilerplate.version = '8.0.0';
+      
       //Current application root path (including virtual directory if exists).
       abp.appPath = abp.appPath || '/';
       abp.pageLoadTime = new Date();
@@ -650,6 +654,19 @@
 
         return str.substr(0, maxLength - postfix.length) + postfix;
       };
+
+      abp.utils.ensureEndsWith = function (str, c) {
+        if (!str) {
+          return str;
+        }
+
+        if (str.endsWith(c))
+        {
+          return str;
+        }
+
+        return str + c;
+      };      
 
       abp.utils.isFunction = function (obj) {
         if ($) {

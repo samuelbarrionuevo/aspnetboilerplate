@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
     <AssemblyName>Abp.Zero.SampleApp.Tests</AssemblyName>
     <PackageId>Abp.Zero.SampleApp.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -28,16 +28,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="xunit" Version="2.4.2-pre.12" />
-    <PackageReference Include="xunit.extensibility.execution" Version="2.4.2-pre.12" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="xunit" Version="2.9.0" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.9.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Shouldly" Version="4.0.3" />
-    <PackageReference Include="Effort.EF6" Version="2.2.16" />
-    <PackageReference Include="NSubstitute" Version="4.3.0" />
+    <PackageReference Include="Shouldly" Version="4.2.1" />
+    <PackageReference Include="Effort.EF6" Version="2.2.17" />
+    <PackageReference Include="NSubstitute" Version="5.1.0" />
+    <PackageReference Update="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,8 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
